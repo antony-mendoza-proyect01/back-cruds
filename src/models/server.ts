@@ -1,5 +1,7 @@
 import express, {Application, Request, Response} from 'express';
 import routesDrivers from '../routes/driver';
+import db from'../db/connection';
+
 
 class Server {
  private app: express.Application;
@@ -12,6 +14,7 @@ class Server {
     this.listen();
     this.midleware();
     this.routes();
+    this.dbConnect();
  }
  listen(){
     this.app.listen(this.port, ()=>{
@@ -30,6 +33,19 @@ class Server {
  midleware(){
     //parseamos el body
     this.app.use(express.json());;
+ }
+
+ async dbConnect(){
+
+try{
+   await db.authenticate();
+   console.log('Base de datos conectada')
+
+}catch(error){
+   console.log(error);
+console.log('error al conectarse a la BD')
+}
+
  }
 
 }
