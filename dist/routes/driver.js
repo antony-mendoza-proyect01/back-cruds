@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const driver_1 = require("../controllers/driver");
+const router = (0, express_1.Router)();
+router.get('/', driver_1.getDrivers);
+router.get('/:id', driver_1.getDriver);
+router.delete('/:id', driver_1.deleteDriver);
+router.post('/', driver_1.postDriver);
+router.put('/:id', driver_1.putDriver);
+exports.default = router;
